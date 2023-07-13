@@ -1,7 +1,7 @@
 from IPython.display import clear_output
 clear_output()
 
-
+#EMPTY TASKLIST AT FIRST
 task_list =[]
 def display_task(task_list):
     print('Here are your current tasks')
@@ -10,6 +10,7 @@ def display_task(task_list):
 def task_choice():
     choice=input("What task would you like to add?: (Enter 'stop' to finish) ")
     while choice.lower() != 'stop':
+        #As long as 'stop' is not typed, keep running
         task_list.append(choice)
         choice=input("What task would you like to add?: (Enter 'stop' to finish) ")
         
@@ -18,7 +19,9 @@ def task_choice():
 #REMOVE TASKS
 def task_removal():
     choice=input("What task would you like to remove?: (Enter 'skip' to leave list as it is) ")
+    #IF SKIP IS TYPED, DONT CHANGE ANYTHING
     while choice.lower() != 'skip':
+        #TO CHECK IF THE TASK YOU WANT TO REMOVE IS IN THE LIST OR ELSE IT'LL DISPLAY AN ERROR MESSAGE
         try:
             task_list.remove(choice)
         except ValueError:
@@ -48,8 +51,6 @@ def taskon_choice():
 taskon= True
 
 #First Task list
-
-
 
 while taskon:
 
