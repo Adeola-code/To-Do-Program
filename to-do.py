@@ -1,79 +1,80 @@
 from IPython.display import clear_output
-clear_output()
+#THE TASKLIST CLASS
+class TaskList():
+    def __init__(self):
+        self.task_list = []
 
-#EMPTY TASKLIST AT FIRST
-task_list =[]
-def display_task(task_list):
-    print('Here are your current tasks')
-    print(task_list)
-# ADD TASKS
-def task_choice():
-    choice=input("What task would you like to add?: (Enter 'stop' to finish) ")
-    while choice.lower() != 'stop':
-        #As long as 'stop' is not typed, keep running
-        task_list.append(choice)
-        choice=input("What task would you like to add?: (Enter 'stop' to finish) ")
+
+
+
+    
+#DISPLAY TASKS
+    def display_task(self):
+        print('Here are your current tasks:')
+        print(self.task_list)
+
+
+
+    
+#ADD TASKS
+    def task_choice(self):
+        choice = input("What task would you like to add? (Enter 'stop' to finish): ")
+        while choice.lower() != 'stop':
+            self.task_list.append(choice)
+            choice = input("What task would you like to add? (Enter 'stop' to finish): ")
+
+
+
+
+    
         
-    clear_output()
-    
-#REMOVE TASKS
-def task_removal():
-    choice=input("What task would you like to remove?: (Enter 'skip' to leave list as it is) ")
-    #IF SKIP IS TYPED, DONT CHANGE ANYTHING
-    while choice.lower() != 'skip':
-        #TO CHECK IF THE TASK YOU WANT TO REMOVE IS IN THE LIST OR ELSE IT'LL DISPLAY AN ERROR MESSAGE
-        try:
-            task_list.remove(choice)
-        except ValueError:
-            print('This task is not in the list. Please enter a valid task!')
-        choice=input("What task would you like to remove?: (Enter 'skip' to leave list as it is) ")
-    return(choice)
-    
-#CONTINUE OR STOP
-def taskon_choice():
-    choice = 'wrong'
-    while choice not in ['Y','N']:
-        choice = input("Would you like to add more tasks? Y or N ")
-
-        if choice not in ['Y', 'N']:
-            clear_output()
-
-            print("Oops! I didn't get that. Please make sure to choose Y or N")
-
-    if choice == "Y":
-        #Still wanna add more tasks
-        return True
-    else:
-        #No more tasks
-        return False
-
-    #OMO! TO SUM EVERYTHING AND KEEP IT RUNNING ALTOGETHER SHA
-taskon= True
-
-#First Task list
-
-while taskon:
-
-    #clear past output and show list
-    clear_output()
-    display_task(task_list)
-
-    #Choose Task to add
-    task_choice()
-
-
-    clear_output()
-    display_task(task_list)
-
-    #choose to remove task 
-    task_removal()
-
-    #clear screen and show new task list
-    clear_output()
-    display_task(task_list)
-
-    #To keep on adding
-    taskon= taskon_choice()
+#TO REMOVE TASKS
+    def task_removal(self):
+        choice = input("What task would you like to remove? (Enter 'skip' to leave list as it is): ")
+        while choice.lower() != 'skip':
+            try:
+                self.task_list.remove(choice)
+            except ValueError:
+                print('This task is not in the list. Please enter a valid task!')
+            choice = input("What task would you like to remove? (Enter 'skip' to leave list as it is): ")
+        return choice
 
 
 
+
+
+#THE OPTIONS PAGE TO DETERMINE WHAT ACTION I WANT TO MAKE   
+class Options(TaskList):
+    def __init__(self):
+        #SUPER GIVES ME ACCESS TO THE METHODS AND PROPS OF THE TASKLIST CLASS
+        super().__init__()
+
+#TO RUN THE OPTIONS
+    def run_options(self):
+        while True:
+            
+            option = input(
+                'What do you want to do?\n1. View Tasks\n2. Add Task\n3. Remove Tasks\n4. End Program\n')
+            if option == '1':
+                self.display_task()
+            elif option == '2':
+                self.task_choice()
+            elif option == '3':
+                self.task_removal()
+            elif option == '4':
+                self.taskon_choice()
+                break
+                clear_output()
+            else:
+                print("Invalid option. Please try again.")
+
+
+
+
+
+
+# Create an Options object TO LINK BOTH TASKLIST AND OPTIONS TOGETHER
+options_obj = Options()
+options_obj.run_options()
+
+print("Task management is complete.")
