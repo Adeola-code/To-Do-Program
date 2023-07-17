@@ -62,7 +62,7 @@ class Options(TaskList):
             elif option == '3':
                 self.task_removal()
             elif option == '4':
-                self.taskon_choice()
+                
                 break
                 clear_output()
             else:
